@@ -66,6 +66,7 @@ public class Controller extends HttpServlet {
         try {
             ArrayList<MetodoPago> metodos = negocio.TraerMetodosPago();
             Gson gson = new Gson();
+            
                 String json = gson.toJson(metodos);
                
                 response(resp, json);
@@ -77,6 +78,7 @@ public class Controller extends HttpServlet {
            String fecha=(String)request.getParameter("consutarDia");
           ArrayList<Gasto> gastos=negocio.consultarDia(fecha);
           Gson gson = new Gson();
+          
              String json = gson.toJson(gastos);
           response(resp,json);
        }
