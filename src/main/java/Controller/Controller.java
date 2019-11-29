@@ -28,7 +28,8 @@ import model.Negocio;
 @WebServlet(name = "Controller", urlPatterns = {"/Controller"})
 public class Controller extends HttpServlet {
 
-   Negocio negocio;
+   
+    Negocio negocio;
 
     @Override
     public void init() throws ServletException {
@@ -66,7 +67,6 @@ public class Controller extends HttpServlet {
         try {
             ArrayList<MetodoPago> metodos = negocio.TraerMetodosPago();
             Gson gson = new Gson();
-            
                 String json = gson.toJson(metodos);
                
                 response(resp, json);
@@ -74,12 +74,29 @@ public class Controller extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-       }else if(request.getParameter("consutarDia")!=null){
+       }if(request.getParameter("consutarDia")!=null){
            String fecha=(String)request.getParameter("consutarDia");
           ArrayList<Gasto> gastos=negocio.consultarDia(fecha);
           Gson gson = new Gson();
-          
              String json = gson.toJson(gastos);
+          response(resp,json);
+       }if(request.getParameter("consutarINI")!=null){
+           String fechaini=(String)request.getParameter("consutarINI");
+           String fecgafin=(String)request.getParameter("consutarFIN");
+          ArrayList<Gasto> gastos=negocio.consultarMes(fechaini, fecgafin);
+          Gson gson = new Gson();
+             String json = gson.toJson(gastos);
+          response(resp,json);
+       }if(request.getParameter("Progress")!=null){
+           String fecha=(String)request.getParameter("Progress");
+          ArrayList<MetodoPago> metodos = null;
+           try {
+               metodos = negocio.MetodosPagoProgress();
+           } catch (SQLException ex) {
+               Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+           }
+          Gson gson = new Gson();
+             String json = gson.toJson(metodos);
           response(resp,json);
        }
     }

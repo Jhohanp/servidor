@@ -19,7 +19,7 @@ import model.Efectivo;
  */
 public class EfectivoDAO {
     
-     public ArrayList<Efectivo> BuscarTodo() throws SQLException {
+       public ArrayList<Efectivo> BuscarTodo() throws SQLException {
 		Connection co =null;
 		Statement stm= null;
 		ResultSet rs=null;
@@ -71,6 +71,7 @@ public class EfectivoDAO {
 				e.setDescripcion(rs.getString(4));
 				e.setFecha(rs.getString(3));
 				e.setMonto(rs.getInt(2));
+                                e.setDinero(rs.getInt(5));
 				
                                 
 				listaEfectivo.add(e);
@@ -92,9 +93,10 @@ public class EfectivoDAO {
 		Statement stm= null;
 		Connection con=null;
 		ArrayList<Efectivo> aux=this.Buscar(1); 
+                aux.get(0).setDinero(aux.get(0).getDinero()+ef.getMonto());
                 aux.get(0).setMonto(aux.get(0).getMonto()+ef.getMonto());
                 this.actualizar(aux.get(0));
-		String sql="INSERT INTO efectivo values ('"+ef.getCodEfectivo()+"','"+ef.getMonto()+"','"+ef.getFecha()+"','"+ef.getDescripcion()+"')";
+		String sql="INSERT INTO efectivo values ('"+ef.getCodEfectivo()+"','"+ef.getMonto()+"','"+ef.getFecha()+"','"+ef.getDescripcion()+"','"+0+"')";
 		
 		try {			
 			con=conexion.conectar();
@@ -117,7 +119,7 @@ public class EfectivoDAO {
 		
 		boolean actualizar=false;
 				
-		String sql="UPDATE efectivo SET ID="+ef.getCodEfectivo()+", Monto="+ef.getMonto()+", Fecha='"+ef.getFecha()+"', Descripcion='"+ef.getDescripcion()+"' WHERE ID="+1;
+		String sql="UPDATE efectivo SET ID="+ef.getCodEfectivo()+", Monto="+ef.getMonto()+", Fecha='"+ef.getFecha()+"', Descripcion='"+ef.getDescripcion()+"', Dinero='"+ef.getDinero()+"' WHERE ID="+1;
 		try {
 			connect=conexion.conectar();
 			stm=connect.createStatement();

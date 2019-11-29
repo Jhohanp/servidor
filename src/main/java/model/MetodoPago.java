@@ -11,12 +11,13 @@ package model;
  */
 public class MetodoPago {
   String Nombre, Digitos;
-    int identificador;
+    int identificador,Dinero;
 
-    public MetodoPago(String Nombre, String Digitos, int identificador) {
+    public MetodoPago(String Nombre, String Digitos, int identificador, int Dinero) {
         this.Nombre = Nombre;
         this.Digitos = Digitos;
         this.identificador = identificador;
+        this.Dinero=Dinero;
     }
 
     public int getIdentificador() {
@@ -46,5 +47,13 @@ public class MetodoPago {
 
     public void setDigitos(String Digitos) {
         this.Digitos = Digitos;
+    }
+
+    public int getDinero() {
+        return Dinero;
+    }
+
+    public void setDinero(int Dinero) {
+        this.Dinero = Dinero;
     }  
 }

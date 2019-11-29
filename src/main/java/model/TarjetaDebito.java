@@ -10,10 +10,10 @@ package model;
  * @author jhopi
  */
 public class TarjetaDebito {
-  
+   
     
    private String Tipo;
-   private int Digitos,Disponible,Cuota;
+   private int Digitos,Disponible,Cuota,Dinero;
 
     public TarjetaDebito() {
     }
@@ -48,5 +48,13 @@ public class TarjetaDebito {
 
     public void setCuota(int Cuota) {
         this.Cuota = Cuota;
-    }  
+    }
+    public int getDinero() {
+        return Dinero;
+    }
+
+    public void setDinero(int Dinero) {
+        this.Dinero = Dinero;
+    }
+
 }

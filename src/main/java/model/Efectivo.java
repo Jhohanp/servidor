@@ -10,8 +10,8 @@ package model;
  * @author jhopi
  */
 public class Efectivo {
-     private String Fecha, Descripcion;
-    private int Monto,CodEfectivo;
+    private String Fecha, Descripcion;
+    private int Monto,CodEfectivo,Dinero;
 
     public Efectivo() {
     }
@@ -47,5 +47,12 @@ public class Efectivo {
     public void setMonto(int Monto) {
         this.Monto = Monto;
     }
-    
+
+    public int getDinero() {
+        return Dinero;
+    }
+
+    public void setDinero(int Dinero) {
+        this.Dinero = Dinero;
+    }
 }

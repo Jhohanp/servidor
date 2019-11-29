@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author jhopi
  */
 public class Negocio {
-     gastoDAO daogasto = new gastoDAO();
+    gastoDAO daogasto = new gastoDAO();
     EfectivoDAO daoefectivo = new EfectivoDAO();
     TCDAO daoTC = new TCDAO();
     TDDAO daoTD = new TDDAO();
@@ -48,22 +48,42 @@ public class Negocio {
     }
     public ArrayList<MetodoPago> TraerMetodosPago() throws SQLException {
         ArrayList<MetodoPago> metodos = new ArrayList<>();
-             metodos.add(new MetodoPago("Efectivo", "",0));
+             metodos.add(new MetodoPago("Efectivo", "",0,0));
              
         ArrayList<TarjetaCredito> Tcs = daoTC.BuscarTodo();
         for (int i = 0; i < Tcs.size(); i++) {
-           MetodoPago met = new MetodoPago(Tcs.get(i).getTipo(), Tcs.get(i).getDigitos()+"",1);
+           MetodoPago met = new MetodoPago(Tcs.get(i).getTipo(), Tcs.get(i).getDigitos()+"",1,Tcs.get(i).getDinero());
            metodos.add(met);
-            System.out.println("AQUQUQUUQ"+met.identificador);
         }
         ArrayList<TarjetaDebito> Tds = daoTD.BuscarTodo();
         for (int i = 0; i < Tds.size(); i++) {
-           MetodoPago met = new MetodoPago(Tds.get(i).getTipo(), Tds.get(i).getDigitos()+"",2);
+           MetodoPago met = new MetodoPago(Tds.get(i).getTipo(), Tds.get(i).getDigitos()+"",2,Tds.get(i).getDinero());
            metodos.add(met);
-            System.out.println("AQUIIII"+met.identificador);
 
         }
         System.out.println(metodos.size());
+       return metodos;
+    }
+    
+    public ArrayList<MetodoPago> MetodosPagoProgress() throws SQLException {
+        ArrayList<MetodoPago> metodos = new ArrayList<>();
+            ArrayList<Efectivo> ef = daoefectivo.Buscar(1);
+            for (int i = 0; i < ef.size(); i++) {
+            metodos.add(new MetodoPago("Efectivo", "",ef.get(i).getMonto(),ef.get(i).getDinero()));
+        }
+             
+             
+        ArrayList<TarjetaCredito> Tcs = daoTC.BuscarTodo();
+        for (int i = 0; i < Tcs.size(); i++) {
+           MetodoPago met = new MetodoPago(Tcs.get(i).getTipo(), Tcs.get(i).getDigitos()+"",Tcs.get(i).getCupo(),Tcs.get(i).getDinero());
+           metodos.add(met);
+        }
+        ArrayList<TarjetaDebito> Tds = daoTD.BuscarTodo();
+        for (int i = 0; i < Tds.size(); i++) {
+           MetodoPago met = new MetodoPago(Tds.get(i).getTipo(), Tds.get(i).getDigitos()+"",Tds.get(i).getDisponible(),Tds.get(i).getDinero());
+           metodos.add(met);
+
+        }
        return metodos;
     }
 
@@ -87,6 +107,17 @@ public class Negocio {
     public ArrayList<Gasto> consultarDia(String fecha){
             try {
                 ArrayList<Gasto> gastos=daogasto.BuscarDia(fecha);
+                return gastos;
+            } catch (SQLException ex) {
+                Logger.getLogger(Negocio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return null;
+    }
+    
+
+    public ArrayList<Gasto> consultarMes(String ini, String fin){
+            try {
+                ArrayList<Gasto> gastos=daogasto.BuscarGastosentre(ini, fin);
                 return gastos;
             } catch (SQLException ex) {
                 Logger.getLogger(Negocio.class.getName()).log(Level.SEVERE, null, ex);

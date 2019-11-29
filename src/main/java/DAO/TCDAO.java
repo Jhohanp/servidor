@@ -19,7 +19,7 @@ import model.TarjetaCredito;
  * @author jhopi
  */
 public class TCDAO implements IBaseDatos<TarjetaCredito>{
-    
+  	
 
 	public boolean insertar(TarjetaCredito Tc) throws SQLException {
 		boolean insertar = false;
@@ -27,7 +27,7 @@ public class TCDAO implements IBaseDatos<TarjetaCredito>{
 		Statement stm= null;
 		Connection con=null;
 		
-		String sql="INSERT INTO tarjetacredito values ('"+Tc.getDigitos()+"','"+Tc.getTipo()+"','"+Tc.getCupo()+"','"+Tc.getCuota()+"','"+Tc.getInteres()+"')";
+		String sql="INSERT INTO tarjetacredito values ('"+Tc.getDigitos()+"','"+Tc.getTipo()+"','"+Tc.getCupo()+"','"+Tc.getCuota()+"','"+Tc.getInteres()+"','"+Tc.getCupo()+"')";
 		
 		try {			
 			con=conexion.conectar();
@@ -64,6 +64,7 @@ public class TCDAO implements IBaseDatos<TarjetaCredito>{
 				i.setCupo(rs.getInt(3));
                                 i.setDigitos(rs.getInt(1));
                                 i.setInteres(rs.getDouble(5));
+                                i.setDinero(rs.getInt(6));
                                 
 				listaTC.add(i);
 			}

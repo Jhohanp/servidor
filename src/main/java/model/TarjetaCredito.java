@@ -10,9 +10,9 @@ package model;
  * @author jhopi
  */
 public class TarjetaCredito {
-     
+    
     private String Tipo;
-    private int Digitos,Cupo,Cuota;
+    private int Digitos,Cupo,Cuota,Dinero;
     private double Interes;
 
     public TarjetaCredito() {
@@ -57,5 +57,14 @@ public class TarjetaCredito {
 
     public void setInteres(double Interes) {
         this.Interes = Interes;
-    } 
+    }
+
+    public int getDinero() {
+        return Dinero;
+    }
+
+    public void setDinero(int Dinero) {
+        this.Dinero = Dinero;
+    }
+     
 }

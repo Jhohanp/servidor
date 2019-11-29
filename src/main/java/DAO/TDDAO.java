@@ -19,15 +19,13 @@ import model.TarjetaDebito;
  * @author jhopi
  */
 public class TDDAO implements IBaseDatos<TarjetaDebito> {
-    
-
-	public boolean insertar(TarjetaDebito td) {
+    public boolean insertar(TarjetaDebito td) {
 		boolean registrar = false;
 		
 		Statement stm= null;
 		Connection con=null;
 		
-		String sql="INSERT INTO tarjetadebito values ('"+td.getDigitos()+"','"+td.getTipo()+"','"+td.getDisponible()+"','"+td.getCuota()+"')";
+		String sql="INSERT INTO tarjetadebito values ('"+td.getDigitos()+"','"+td.getTipo()+"','"+td.getDisponible()+"','"+td.getCuota()+"','"+td.getDisponible()+"')";
 		
 		try {			
 			con=conexion.conectar();
@@ -63,6 +61,7 @@ public class TDDAO implements IBaseDatos<TarjetaDebito> {
 				s.setCuota(rs.getInt(4));
 				s.setDigitos(rs.getInt(1));
                                 s.setDisponible(rs.getInt(3));
+                                s.setDinero(rs.getInt(5));
                                
                             
 				listaTD.add(s);

@@ -23,7 +23,8 @@ import model.TarjetaDebito;
  * @author jhopi
  */
 public class gastoDAO implements IBaseDatos<Gasto>  {
-     EfectivoDAO daoefectivo = new EfectivoDAO();
+   
+    EfectivoDAO daoefectivo = new EfectivoDAO();
     TCDAO TCD = new TCDAO();
     TDDAO TDD = new TDDAO();
 	

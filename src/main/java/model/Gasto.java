@@ -10,7 +10,8 @@ package model;
  * @author jhopi
  */
 public class Gasto {
-      
+   
+    
     private String CodGasto, Categoria, fecha, hora, metodoPago,Descripcion;
     private int MontoGasto, FrecDiaria;
 
@@ -94,6 +95,4 @@ public class Gasto {
     public void setDescripcion(String Descripcion) {
         this.Descripcion = Descripcion;
     }
-    
-  
 }
