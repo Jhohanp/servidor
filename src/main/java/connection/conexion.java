@@ -24,7 +24,7 @@ public class conexion {
        
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/controlgastosf", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/controlgastosf", "remoto","gastos2019");
         } catch (Exception e) {
         }
        
